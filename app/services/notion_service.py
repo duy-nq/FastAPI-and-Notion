@@ -1,15 +1,15 @@
 from app.core.interfaces.notion_interface import NotionAPIInterface
 from app.models.notion.detailed_info import DetailedInfo
 from app.models.notion.main_info import MainInfo
+from app.models.notion.page import Page
 from app.models.notion.scientific_info import ScientificInfo
-from app.models.notion_page import Page
 
 class NotionService:
     def __init__(self, notion_client: NotionAPIInterface):
         self.notion_client = notion_client
 
     def create_page(self, page: Page):
-        return self.notion_client.create_subpage(page.to_dict())
+        return self.notion_client.create_subpage(page_data=page)
 
     def get_page(self, page_id: str):
         return self.notion_client.read_subpage(page_id)

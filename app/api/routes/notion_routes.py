@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from app.models.notion.detailed_info import DetailedInfoProperty
 from app.models.notion.main_info import MainInfoProperty
+from app.models.notion.page import PageProperty
 from app.models.notion.scientific_info import ScientificInfoProperty
 from app.services.notion_service import NotionService
 from app.core.dependencies import get_notion_client
@@ -8,10 +9,10 @@ from app.clients.notion_client import NotionClient
 
 router = APIRouter()
 
-# @router.post("/page", response_model=None)
-# def create_page(page: Page, client: NotionClient = Depends(get_notion_client)):
-#     service = NotionService(client)
-#     return service.create_page(page)
+@router.post("/page")
+def create_page(page: PageProperty, client: NotionClient = Depends(get_notion_client)):
+    service = NotionService(client)
+    return service.create_page(page)
 
 @router.get("/page-view")
 def read_page(page_id: str, client: NotionClient = Depends(get_notion_client)):
