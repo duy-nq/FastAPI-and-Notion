@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from app.models.notion.main_info import MainInfoProperty
+from app.models.notion.scientific_info import ScientificInfoProperty
 from app.models.properties.title import Properties
 from app.services.notion_service import NotionService
 from app.core.dependencies import get_notion_client
@@ -30,8 +31,12 @@ def update_main_info(page_id: str,
     return service.update_main_info(page_id=page_id, data=newdata)
 
 @router.patch("/page-update-scientific")
-def update_scientific_info():
-    pass
+def update_scientific_info(page_id: str,
+                     newdata: ScientificInfoProperty,
+                     client: NotionClient = Depends(get_notion_client)):
+    
+    service = NotionService(client)
+    return service.update_scientific_info(page_id=page_id, data=newdata)
 
 @router.patch("/page-update-detail")
 def update_detailed_info():

@@ -46,9 +46,8 @@ class NotionClient(NotionAPIInterface):
                 'Authorization': f'Bearer {self.api_token}',
                 'Content-Type': 'application/json'
             },
-            json={
-                'properties': scientific_info
-            })
+            json=scientific_info.model_dump(by_alias=True)
+            )
         
         return res.json()
 
