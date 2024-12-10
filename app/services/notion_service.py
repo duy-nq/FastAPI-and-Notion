@@ -13,6 +13,18 @@ class NotionService:
 
     def update_page(self, page: Page):
         return self.notion_client.update_subpage(page.page_id, page.to_dict())
+    
+    def update_main_info(self, page: Page):
+        pass
+
+    def update_scientific_info(self, page: Page):
+        pass
+
+    def update_detailed_info(self, page: Page):
+        pass
 
     def delete_page(self, page_id: str):
         return self.notion_client.delete_subpage(page_id)
+
+    def restore_page(self, page_id: str):
+        return self.notion_client.restore_subpage(page_id)

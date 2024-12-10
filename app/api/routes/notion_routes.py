@@ -20,6 +20,24 @@ def read_page(page_id: str, client: NotionClient = Depends(get_notion_client)):
 def update_page():
     pass
 
-@router.patch("/page-delete")
-def delete_page():
+@router.patch("/page-update-main")
+def update_main_info():
     pass
+
+@router.patch("/page-update-scientific")
+def update_scientific_info():
+    pass
+
+@router.patch("/page-update-detail")
+def update_detailed_info():
+    pass
+
+@router.patch("/page-delete")
+def delete_page(page_id: str, client: NotionClient = Depends(get_notion_client)):
+    service = NotionService(client)
+    return service.delete_page(page_id=page_id)
+
+@router.patch("/page-restore")
+def delete_page(page_id: str, client: NotionClient = Depends(get_notion_client)):
+    service = NotionService(client)
+    return service.restore_page(page_id=page_id)
