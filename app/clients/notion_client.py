@@ -3,8 +3,9 @@ from requests import get
 from os import getenv
 
 class NotionClient(NotionAPIInterface):
-    def __init__(self, api_token: str):
+    def __init__(self, api_token: str, database_key: str):
         self.api_token = getenv(api_token)
+        self.database_id = getenv(database_key)
         self.base_url = "https://api.notion.com/v1"
 
     def create_subpage(self, page_data: dict):
