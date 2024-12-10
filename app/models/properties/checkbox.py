@@ -1,14 +1,5 @@
-from typing import Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
-class CheckboxPostModel(BaseModel):
-    checkbox: bool
-
-class CheckboxGetModel(BaseModel):
-    id: Optional[str]
-    type: Optional[str]
-    checkbox: bool
-
-class CheckboxPayloadModel(BaseModel):
-    Task_completed: Optional[CheckboxGetModel] = None
-    properties: Optional[dict] = None
+class Checkbox(BaseModel):
+    type: str = Field(..., default='checkbox')
+    checkbox: bool = Field(..., default=True)

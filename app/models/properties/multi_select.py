@@ -1,25 +1,8 @@
-from typing import List, Optional
-from pydantic import BaseModel
+from typing import List
+from pydantic import BaseModel, Field
 
-# POST Models
-class MultiSelectPostBaseModel(BaseModel):
-    name: str
-    color: Optional[str]  # Optional to allow user to specify color if supported
+from app.models.properties.tag import Tag
 
-class MultiSelectPostPayloadModel(BaseModel):
-    multi_select_post: List[MultiSelectPostBaseModel]
-
-# GET Models
-class MultiSelectGetBaseModel(BaseModel):
-    id: str
-    name: str
-    color: str
-
-class MultiSelectGetModel(BaseModel):
-    id: str
-    name: str
-    type: str
-    multi_select: List[MultiSelectGetBaseModel]
-
-class MultiSelectGetPayloadModel(BaseModel):
-    multi_select_get: MultiSelectGetModel
+class MultiSelect(BaseModel):
+    type: str = Field(..., default='multi_select')
+    multi_select = List[Tag]

@@ -25,16 +25,17 @@ class NotionClient(NotionAPIInterface):
         # Implementation for updating a subpage
         pass
 
-    def update_main_info(self, page_id: str, main_info: dict):
+    def update_main_info(self, page_id: str, main_info):              
+        print(main_info.model_dump())
+
         res = patch(f'{self.base_url}/pages/{page_id}',
             headers={
                 'Notion-Version': '2022-06-28',
                 'Authorization': f'Bearer {self.api_token}',
                 'Content-Type': 'application/json'
             },
-            data={
-                'properties': main_info
-            })
+            json=main_info.model_dump(by_alias=True)
+            )
         
         return res.json()
 
@@ -45,7 +46,7 @@ class NotionClient(NotionAPIInterface):
                 'Authorization': f'Bearer {self.api_token}',
                 'Content-Type': 'application/json'
             },
-            data={
+            json={
                 'properties': scientific_info
             })
         
@@ -58,7 +59,7 @@ class NotionClient(NotionAPIInterface):
                 'Authorization': f'Bearer {self.api_token}',
                 'Content-Type': 'application/json'
             },
-            data={
+            json={
                 'properties': detailed_info
             })
         

@@ -1,4 +1,5 @@
 from app.core.interfaces.notion_interface import NotionAPIInterface
+from app.models.notion.main_info import MainInfo
 from app.models.notion_page import Page
 
 class NotionService:
@@ -14,8 +15,8 @@ class NotionService:
     def update_page(self, page: Page):
         return self.notion_client.update_subpage(page.page_id, page.to_dict())
     
-    def update_main_info(self, page: Page):
-        pass
+    def update_main_info(self, page_id: str, data: MainInfo):
+        return self.notion_client.update_main_info(page_id, data)
 
     def update_scientific_info(self, page: Page):
         pass

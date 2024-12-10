@@ -1,41 +1,13 @@
-from typing import List, Optional
-from pydantic import BaseModel
+from typing import List
+from pydantic import BaseModel, Field
 
-# Shared models for rich text components
-class TextModel(BaseModel):
-    content: str
-    link: Optional[str]
+class Text(BaseModel):
+    content: str = Field(..., default='Empty')
 
-class AnnotationsModel(BaseModel):
-    bold: bool
-    italic: bool
-    strikethrough: bool
-    underline: bool
-    code: bool
-    color: str
+class RichText(BaseModel):
+    type: str = Field(..., default='text')
+    text: Text
 
-class RichTextModel(BaseModel):
-    type: str
-    text: TextModel
-    annotations: AnnotationsModel
-    plain_text: str
-    href: Optional[str]
-
-# Model for POST payload
-class RichTextPostModel(BaseModel):
-    rich_text: List[RichTextModel]
-
-class RichTextPostModel(BaseModel):
-    Description: RichTextPostModel
-
-class RichTextPostPayloadModel(BaseModel):
-    properties: RichTextPostModel
-
-# Model for GET payload
-class RichTextGetModel(BaseModel):
-    id: str
-    type: str
-    rich_text: List[RichTextModel]
-
-class RichTextGetPayloadModel(BaseModel):
-    Description: RichTextGetModel
+class RichTextProperty(BaseModel):
+    type: str = Field(..., default='rich_text')
+    rich_text: List[RichText]
