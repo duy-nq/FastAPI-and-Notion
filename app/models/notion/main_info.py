@@ -1,14 +1,16 @@
-from pydantic import BaseModel
-from typing import Dict, Optional
+from pydantic import BaseModel, Field
 
-from app.models.properties.checkbox import CheckboxModel
-from app.models.properties.number import NumberModel
-from app.models.properties.rich_text import TitlePostModel
-
-class MainInfoModel(BaseModel):
-    title: TitlePostModel
-    checkbox: CheckboxModel
-    price: NumberModel
+from app.models.properties.checkbox import Checkbox
+from app.models.properties.number import Number
+from app.models.properties.title import Title
 
 class MainInfo(BaseModel):
-    properties: Dict[str, MainInfoModel]
+    title: Title = Field(..., alias='Tên sản phẩm')
+    price: Number = Field(..., alias='Giá (VND)')
+    in_stock: Checkbox = Field(..., alias='Còn hàng')
+
+    class Config:
+        populate_by_name = True
+
+class MainInfoProperty(BaseModel):
+    properties: MainInfo
