@@ -10,9 +10,6 @@ class NotionService:
 
     def get_page(self, page_id: str):
         return self.notion_client.read_subpage(page_id)
-    
-    def get_database(self, database_id):
-        return self.notion_client.read_database(database_id)
 
     def update_page(self, page: Page):
         return self.notion_client.update_subpage(page.page_id, page.to_dict())

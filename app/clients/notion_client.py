@@ -19,15 +19,6 @@ class NotionClient(NotionAPIInterface):
             })
         
         return res.json()
-    
-    def read_database(self, database_id: str):
-        res = get(f'{self.base_url}/databases/{database_id}',
-            headers={
-                'Notion-Version': '2022-06-28',
-                'Authorization': f'Bearer {self.api_token}'
-            })
-        
-        return res.json()
         
     def update_subpage(self, page_id: str, page_data: dict):
         # Implementation for updating a subpage
