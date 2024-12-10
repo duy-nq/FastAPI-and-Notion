@@ -47,20 +47,21 @@ class NotionClient(NotionAPIInterface):
                 'Content-Type': 'application/json'
             },
             json=scientific_info.model_dump(by_alias=True)
-            )
+        )
         
         return res.json()
 
     def update_detailed_info(self, page_id: str, detailed_info: dict):
+        print(detailed_info.model_dump())
+        
         res = patch(f'{self.base_url}/pages/{page_id}',
             headers={
                 'Notion-Version': '2022-06-28',
                 'Authorization': f'Bearer {self.api_token}',
                 'Content-Type': 'application/json'
             },
-            json={
-                'properties': detailed_info
-            })
+            json=detailed_info.model_dump(by_alias=True)
+        )
         
         return res.json()
 

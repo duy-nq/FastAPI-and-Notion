@@ -5,4 +5,4 @@ from app.models.properties.tag import Tag
 
 class Select(BaseModel):
     type: str = Field(default='select')
-    select = Tag
+    select: Tag

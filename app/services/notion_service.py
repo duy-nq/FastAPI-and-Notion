@@ -1,4 +1,5 @@
 from app.core.interfaces.notion_interface import NotionAPIInterface
+from app.models.notion.detailed_info import DetailedInfo
 from app.models.notion.main_info import MainInfo
 from app.models.notion.scientific_info import ScientificInfo
 from app.models.notion_page import Page
@@ -22,8 +23,8 @@ class NotionService:
     def update_scientific_info(self, page_id: str, data: ScientificInfo):
         self.notion_client.update_scientific_info(page_id, data)
 
-    def update_detailed_info(self, page: Page):
-        pass
+    def update_detailed_info(self, page_id: str, data: DetailedInfo):
+        self.notion_client.update_detailed_info(page_id, data)
 
     def delete_page(self, page_id: str):
         return self.notion_client.delete_subpage(page_id)
